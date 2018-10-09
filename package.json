@@ -1,0 +1,34 @@
+{
+  "name": "api",
+  "private": true,
+  "version": "0.0.0",
+  "description": "a Sails application",
+  "keywords": [],
+  "dependencies": {
+    "axios": "^0.18.0",
+    "cheerio": "^1.0.0-rc.2",
+    "include-all": "^1.0.0",
+    "moment": "^2.22.2",
+    "rc": "^1.2.8",
+    "request": "^2.88.0",
+    "sails": "~0.12.13",
+    "sails-disk": "~0.10.9",
+    "sails-mongo": "0.12.3"
+  },
+  "scripts": {
+    "debug": "node debug app.js",
+    "start": "node app.js"
+  },
+  "main": "app.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/yupit/api.git"
+  },
+  "author": "yupit",
+  "license": "",
+  "devDependencies": {
+    "sails-generate-eslintrc": "https://github.com/tugorez/sails-generate-eslintrc",
+    "sails-memory": "^0.10.7",
+    "supertest": "^3.3.0"
+  }
+}
