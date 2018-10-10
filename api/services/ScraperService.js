@@ -152,7 +152,35 @@ const getCurrencies = async () => {
   currencies.push(dominicRepublic[0]);
 
   // BRAZIL
-
+  const urlBrazil =
+    'https://ptax.bcb.gov.br/ptax_internet/consultarUltimaCotacaoDolar.do';
+  const { data: htmlBrz } = await axios(urlBrazil);
+  $ = cheerio.load(htmlBrz);
+  let brazil = [];
+  $('.fundoPadraoBClaro2').each((i, elm) => {
+    let x = $(elm)
+      .children('td')
+      .eq(1)
+      .first()
+      .text()
+      .trim();
+    brazil.push({
+      country: 'brazil',
+      buy: $(elm)
+        .children('td')
+        .eq(1)
+        .first()
+        .text()
+        .trim(),
+      sell: $(elm)
+        .children('td')
+        .eq(2)
+        .first()
+        .text()
+        .trim(),
+    });
+  });
+  currencies.push(brazil[0]);
   return currencies;
 };
 
