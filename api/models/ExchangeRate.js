@@ -21,6 +21,15 @@ module.exports = {
     },
     country: {
       type: 'string',
+      enum: [
+        'mexico',
+        'brazil',
+        'colombia',
+        'dominica',
+        'canada',
+        'euro',
+        'argentina',
+      ],
     },
     createdAt: {
       type: 'datetime',
