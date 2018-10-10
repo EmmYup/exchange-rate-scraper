@@ -62,7 +62,6 @@ const getCurrencies = async () => {
   });
   mexico.push({
     country: 'mexico',
-    currency: 'Dolar U.S.A',
     buy: values[0],
     sell: values[1],
   });
@@ -70,12 +69,19 @@ const getCurrencies = async () => {
 
   // COLOMBIA
   const urlColombia =
-    'http://obieebr.banrep.gov.co/analytics/saw.dll?Go&path=%2Fshared%2fSeries%20Estad%C3%ADsticas_T%2F1.%20Tasa%20de%20Cambio%20Peso%20Colombiano%2F1.1%20TRM%20-%20Disponible%20desde%20el%2027%20de%20noviembre%20de%201991%2F1.1.6.TCM_TRM%20para%20un%20d%C3%ADa&lang=es&options=rdf&NQUser=publico&NQPassword=publico';
+    'https://www.indicadorescolombia.com/cambio-de-dolar-peso-colombiano-hoy.html';
   let { data: htmlcol } = await axios(urlColombia);
   $ = cheerio.load(htmlcol);
   let colombia = [];
-  console.log('COLOMBIA: ', $('#div_datos').find('b').length);
-
+  let colombiaValues = $('.valor').text();
+  colombiaValues = colombiaValues.replace(' pesos colombianos', '');
+  colombia.push({
+    country: 'colombia',
+    buy: colombiaValues,
+    sell: colombiaValues,
+  });
+  console.log('COLOMBIA: ', colombia);
+  currencies.push(colombia[0]);
   return currencies;
 };
 

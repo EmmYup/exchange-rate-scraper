@@ -27,21 +27,20 @@ module.exports.connections = {
    * Installed by default.                                                    *
    *                                                                          *
    ***************************************************************************/
-  memory: {
-    adapter: 'sails-memory',
-  },
-  mongo: {
-    adapter: 'sails-mongo',
-    database: 'xelborcab',
-    url: process.env.MONGO_URL,
-  },
-  testMongo: {
-    adapter: 'sails-mongo',
-    host: 'localhost',
-    port: 27017,
-    database: process.env.LOCAL_MONGO,
-  },
-
+  // memory: {
+  //   adapter: 'sails-memory',
+  // },
+  // mongo: {
+  //   adapter: 'sails-mongo',
+  //   database: 'xelborcab',
+  //   url: process.env.MONGO_URL,
+  // },
+  // testMongo: {
+  //   adapter: 'sails-mongo',
+  //   host: 'localhost',
+  //   port: 27017,
+  //   database: process.env.LOCAL_MONGO,
+  // },
   /***************************************************************************
    *                                                                          *
    * MySQL is the world's most popular relational database.                   *
@@ -57,7 +56,6 @@ module.exports.connections = {
   //   password: 'YOUR_MYSQL_PASSWORD', //optional
   //   database: 'YOUR_MYSQL_DB' //optional
   // },
-
   /***************************************************************************
    *                                                                          *
    * MongoDB is the leading NoSQL database.                                   *
@@ -74,7 +72,6 @@ module.exports.connections = {
   //   password: 'password', //optional
   //   database: 'your_mongo_db_name_here' //optional
   // },
-
   /***************************************************************************
    *                                                                          *
    * PostgreSQL is another officially supported relational database.          *
@@ -91,7 +88,6 @@ module.exports.connections = {
   //   password: 'YOUR_POSTGRES_PASSWORD', // optional
   //   database: 'YOUR_POSTGRES_DB' //optional
   // }
-
   /***************************************************************************
    *                                                                          *
    * More adapters: https://github.com/balderdashy/sails                      *

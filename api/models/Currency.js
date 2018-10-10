@@ -10,6 +10,7 @@ module.exports = {
     tableName: 'currency',
     id: {
       type: 'number',
+      primaryKey: true,
       unique: true,
       autoIncrement: true,
     },
@@ -20,7 +21,7 @@ module.exports = {
     // Relations
     excangeRate: {
       collection: 'ExchangeRate',
-      via: 'Currency',
+      via: 'currency',
     },
   },
 };
