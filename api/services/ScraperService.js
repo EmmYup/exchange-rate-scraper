@@ -121,6 +121,38 @@ const getCurrencies = async () => {
     }
   });
   currencies.push(euro[0]);
+
+  // REPUBLICA DOMINICANA
+  const urlRD =
+    'https://www4.scotiabank.com/cgi-bin/ratesTool/depdisplay.cgi?pid=80';
+  const { data: htmlRD } = await axios(urlRD);
+  $ = cheerio.load(htmlRD);
+  let dominicRepublic = [];
+  $('tr', '#table892').each((i, elm) => {
+    let x = $(elm)
+      .children('td')
+      .text()
+      .trim();
+    if (x.indexOf('Dólar') > -1) {
+      dominicRepublic.push({
+        country: 'dominica',
+        buy: $(elm)
+          .children()
+          .eq(2)
+          .first()
+          .text(),
+        sell: $(elm)
+          .children()
+          .eq(3)
+          .first()
+          .text(),
+      });
+    }
+  });
+  currencies.push(dominicRepublic[0]);
+
+  // BRAZIL
+
   return currencies;
 };
 
