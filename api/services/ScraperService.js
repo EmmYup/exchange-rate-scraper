@@ -32,6 +32,7 @@ const getCurrencies = async () => {
       currency.currency.indexOf('Dolar U.S.A') ? coin : currency,
     argentina[0]
   );
+  delete argentina.currency;
   currencies.push(argentina);
 
   // MEXICO
@@ -41,7 +42,7 @@ const getCurrencies = async () => {
   let mexico = [];
   let values = [];
   $('.tbl-info-financiera tr').each((i, elm) => {
-    var x = $(elm)
+    let x = $(elm)
       .children('td')
       .text()
       .trim();
@@ -80,8 +81,46 @@ const getCurrencies = async () => {
     buy: colombiaValues,
     sell: colombiaValues,
   });
-  console.log('COLOMBIA: ', colombia);
   currencies.push(colombia[0]);
+
+  // CANADA
+  const urlCanada =
+    'https://www.bankofcanada.ca/valet/observations/FXCADUSD/json?recent=1';
+  const { data: responseCanada } = await axios(urlCanada);
+  currencies.push({
+    country: 'canada',
+    buy: responseCanada.observations[0].FXCADUSD.v,
+    sell: responseCanada.observations[0].FXCADUSD.v,
+  });
+
+  // EURO
+  const urlEuro =
+    'https://www.bbva.es/sistema/meta/tarifas/cambiosdivisasbilletes.jsp?mb=si';
+  const { data: htmlEuro } = await axios(urlEuro);
+  $ = cheerio.load(htmlEuro);
+  let euro = [];
+  $('tr', '#tabla05colum').each((i, elm) => {
+    let x = $(elm)
+      .children('td')
+      .text()
+      .trim();
+    if (x.indexOf('DOLAR USA') > -1) {
+      euro.push({
+        country: 'euro',
+        buy: $(elm)
+          .children()
+          .eq(3)
+          .first()
+          .text(),
+        sell: $(elm)
+          .children()
+          .eq(4)
+          .first()
+          .text(),
+      });
+    }
+  });
+  currencies.push(euro[0]);
   return currencies;
 };
 
