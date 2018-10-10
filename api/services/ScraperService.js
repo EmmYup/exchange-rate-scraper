@@ -2,6 +2,7 @@ const cheerio = require('cheerio');
 const axios = require('axios');
 
 const getCurrencies = async () => {
+  // ARGENTINA
   const urlArgentina = `http://www.bna.com.ar/Personas#divisas`;
   let { data: html } = await axios(urlArgentina);
   let $ = cheerio.load(html);
@@ -32,6 +33,8 @@ const getCurrencies = async () => {
     argentina[0]
   );
   currencies.push(argentina);
+
+  // MEXICO
   const urlMexico = 'https://bbv.infosel.com/bancomerindicators/indexV7.aspx';
   let { data: htmlmx } = await axios(urlMexico);
   $ = cheerio.load(htmlmx);
@@ -64,6 +67,15 @@ const getCurrencies = async () => {
     sell: values[1],
   });
   currencies.push(mexico[0]);
+
+  // COLOMBIA
+  const urlColombia =
+    'http://obieebr.banrep.gov.co/analytics/saw.dll?Go&path=%2Fshared%2fSeries%20Estad%C3%ADsticas_T%2F1.%20Tasa%20de%20Cambio%20Peso%20Colombiano%2F1.1%20TRM%20-%20Disponible%20desde%20el%2027%20de%20noviembre%20de%201991%2F1.1.6.TCM_TRM%20para%20un%20d%C3%ADa&lang=es&options=rdf&NQUser=publico&NQPassword=publico';
+  let { data: htmlcol } = await axios(urlColombia);
+  $ = cheerio.load(htmlcol);
+  let colombia = [];
+  console.log('COLOMBIA: ', $('#div_datos').find('b').length);
+
   return currencies;
 };
 
