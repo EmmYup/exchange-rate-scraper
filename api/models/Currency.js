@@ -14,9 +14,17 @@ module.exports = {
       unique: true,
       autoIncrement: true,
     },
-    country: {
+    name: {
       type: 'string',
       enum: ['mxn', 'col', 'real', 'rd', 'canada', 'euro', 'arp'],
+    },
+    createdAt: {
+      type: 'datetime',
+      columnName: 'created_at',
+    },
+    updatedAt: {
+      type: 'datetime',
+      columnName: 'updated_at',
     },
     // Relations
     excangeRate: {

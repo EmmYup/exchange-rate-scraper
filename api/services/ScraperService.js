@@ -15,16 +15,20 @@ const getCurrencies = async () => {
         .children()
         .first()
         .text(),
-      buy: $(elm)
-        .children()
-        .eq(1)
-        .first()
-        .text(),
-      sell: $(elm)
-        .children()
-        .eq(2)
-        .first()
-        .text(),
+      buy: parseFloat(
+        $(elm)
+          .children()
+          .eq(1)
+          .first()
+          .text()
+      ),
+      sell: parseFloat(
+        $(elm)
+          .children()
+          .eq(2)
+          .first()
+          .text()
+      ),
     });
   });
   argentina = argentina.reduce(
@@ -47,18 +51,22 @@ const getCurrencies = async () => {
       .text()
       .trim();
     if (x.indexOf('Dólar Compra') > -1) {
-      values[0] = $(elm)
-        .children('td')
-        .next()
-        .text()
-        .trim();
+      values[0] = parseFloat(
+        $(elm)
+          .children('td')
+          .next()
+          .text()
+          .trim()
+      );
     }
     if (x.indexOf('Dólar Venta') > -1) {
-      values[1] = $(elm)
-        .children('td')
-        .next()
-        .text()
-        .trim();
+      values[1] = parseFloat(
+        $(elm)
+          .children('td')
+          .next()
+          .text()
+          .trim()
+      );
     }
   });
   mexico.push({
@@ -78,8 +86,8 @@ const getCurrencies = async () => {
   colombiaValues = colombiaValues.replace(' pesos colombianos', '');
   colombia.push({
     country: 'colombia',
-    buy: colombiaValues,
-    sell: colombiaValues,
+    buy: parseFloat(colombiaValues),
+    sell: parseFloat(colombiaValues),
   });
   currencies.push(colombia[0]);
 
@@ -107,16 +115,22 @@ const getCurrencies = async () => {
     if (x.indexOf('DOLAR USA') > -1) {
       euro.push({
         country: 'euro',
-        buy: $(elm)
-          .children()
-          .eq(3)
-          .first()
-          .text(),
-        sell: $(elm)
-          .children()
-          .eq(4)
-          .first()
-          .text(),
+        buy: parseFloat(
+          $(elm)
+            .children()
+            .eq(3)
+            .first()
+            .text()
+            .replace(',', '.')
+        ),
+        sell: parseFloat(
+          $(elm)
+            .children()
+            .eq(4)
+            .first()
+            .text()
+            .replace(',', '.')
+        ),
       });
     }
   });
@@ -136,16 +150,20 @@ const getCurrencies = async () => {
     if (x.indexOf('Dólar') > -1) {
       dominicRepublic.push({
         country: 'dominica',
-        buy: $(elm)
-          .children()
-          .eq(2)
-          .first()
-          .text(),
-        sell: $(elm)
-          .children()
-          .eq(3)
-          .first()
-          .text(),
+        buy: parseFloat(
+          $(elm)
+            .children()
+            .eq(2)
+            .first()
+            .text()
+        ),
+        sell: parseFloat(
+          $(elm)
+            .children()
+            .eq(3)
+            .first()
+            .text()
+        ),
       });
     }
   });
@@ -166,18 +184,24 @@ const getCurrencies = async () => {
       .trim();
     brazil.push({
       country: 'brazil',
-      buy: $(elm)
-        .children('td')
-        .eq(1)
-        .first()
-        .text()
-        .trim(),
-      sell: $(elm)
-        .children('td')
-        .eq(2)
-        .first()
-        .text()
-        .trim(),
+      buy: parseFloat(
+        $(elm)
+          .children('td')
+          .eq(1)
+          .first()
+          .text()
+          .trim()
+          .replace(',', '.')
+      ),
+      sell: parseFloat(
+        $(elm)
+          .children('td')
+          .eq(2)
+          .first()
+          .text()
+          .trim()
+          .replace(',', '.')
+      ),
     });
   });
   currencies.push(brazil[0]);
