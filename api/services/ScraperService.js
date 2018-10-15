@@ -1,5 +1,6 @@
 const cheerio = require('cheerio');
 const axios = require('axios');
+const moment = require('moment');
 
 const getCurrencies = async () => {
   // ARGENTINA
@@ -40,39 +41,14 @@ const getCurrencies = async () => {
   currencies.push(argentina);
 
   // MEXICO
-  const urlMexico = 'https://bbv.infosel.com/bancomerindicators/indexV7.aspx';
-  let { data: htmlmx } = await axios(urlMexico);
-  $ = cheerio.load(htmlmx);
-  let mexico = [];
-  let values = [];
-  $('.tbl-info-financiera tr').each((i, elm) => {
-    let x = $(elm)
-      .children('td')
-      .text()
-      .trim();
-    if (x.indexOf('Dólar Compra') > -1) {
-      values[0] = parseFloat(
-        $(elm)
-          .children('td')
-          .next()
-          .text()
-          .trim()
-      );
-    }
-    if (x.indexOf('Dólar Venta') > -1) {
-      values[1] = parseFloat(
-        $(elm)
-          .children('td')
-          .next()
-          .text()
-          .trim()
-      );
-    }
-  });
+  const date = moment(new Date()).format('DD/MM/YYYY');
+  const urlMexico = `http://www.banxico.org.mx/tipcamb/datosieajax?accion=dato&idSeries=SF43718&decimales=4&fecha=${date}`;
+  const mexico = [];
+  const { data: responsemx } = await axios(urlMexico);
   mexico.push({
     country: 'mexico',
-    buy: values[0],
-    sell: values[1],
+    buy: parseFloat(responsemx.body[0].mensaje),
+    sell: parseFloat(responsemx.body[0].mensaje),
   });
   currencies.push(mexico[0]);
 
