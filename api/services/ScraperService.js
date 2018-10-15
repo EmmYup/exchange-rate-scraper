@@ -1,6 +1,7 @@
 const cheerio = require('cheerio');
 const axios = require('axios');
 const moment = require('moment');
+const DOMParser = require('xmldom').DOMParser;
 
 const getCurrencies = async () => {
   // ARGENTINA
@@ -69,12 +70,16 @@ const getCurrencies = async () => {
 
   // CANADA
   const urlCanada =
-    'https://www.bankofcanada.ca/valet/observations/FXCADUSD/json?recent=1';
+    'https://www.bankofcanada.ca/valet/observations/FXCADUSD/xml?recent=1';
   const { data: responseCanada } = await axios(urlCanada);
+  const parser = new DOMParser();
+  const xmlDoc = parser.parseFromString(responseCanada, 'text/xml');
+  const dataCanada = xmlDoc.getElementsByTagName('v')[0].childNodes[0]
+    .nodeValue;
   currencies.push({
     country: 'canada',
-    buy: responseCanada.observations[0].FXCADUSD.v,
-    sell: responseCanada.observations[0].FXCADUSD.v,
+    buy: parseFloat(dataCanada),
+    sell: parseFloat(dataCanada),
   });
 
   // EURO

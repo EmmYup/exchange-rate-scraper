@@ -13,7 +13,8 @@
     "rc": "^1.2.8",
     "sails": "~0.12.13",
     "sails-disk": "~0.10.9",
-    "sails-mongo": "0.12.3"
+    "sails-mongo": "0.12.3",
+    "xmldom": "^0.1.27"
   },
   "scripts": {
     "debug": "node debug app.js",
