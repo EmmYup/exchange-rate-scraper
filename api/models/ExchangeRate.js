@@ -32,14 +32,14 @@ module.exports = {
         'argentina',
       ],
     },
-    createdAt: {
-      type: 'datetime',
-      columnName: 'created_at',
-    },
-    updatedAt: {
-      type: 'datetime',
-      columnName: 'updated_at',
-    },
+    // createdAt: {
+    //   type: 'datetime',
+    //   columnName: 'created_at',
+    // },
+    // updatedAt: {
+    //   type: 'datetime',
+    //   columnName: 'updated_at',
+    // },
     // Relations
     currency: {
       model: 'Currency',

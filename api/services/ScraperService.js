@@ -3,7 +3,18 @@ const axios = require('axios');
 const moment = require('moment');
 const DOMParser = require('xmldom').DOMParser;
 
+const generateCurrencies = async () => {
+  const names = ['mxn', 'col', 'real', 'rd', 'canada', 'euro', 'arp'];
+  const currencies = Currency.find();
+  if (currencies) {
+    return;
+  } else {
+    names.map(async name => await Currency.create({ name }));
+  }
+};
+
 const getCurrencies = async () => {
+  await generateCurrencies();
   // ARGENTINA
   const urlArgentina = `http://www.bna.com.ar/Personas#divisas`;
   let { data: html } = await axios(urlArgentina);
@@ -39,6 +50,13 @@ const getCurrencies = async () => {
     argentina[0]
   );
   delete argentina.currency;
+  const { id: idARG } = await Currency.findOne({ name: 'arp' });
+  await ExchangeRate.create({
+    buy: argentina.buy,
+    sell: argentina.sell,
+    country: argentina.country,
+    Currency: idARG,
+  });
   currencies.push(argentina);
 
   // MEXICO
@@ -50,6 +68,13 @@ const getCurrencies = async () => {
     country: 'mexico',
     buy: parseFloat(responsemx.body[0].mensaje),
     sell: parseFloat(responsemx.body[0].mensaje),
+  });
+  const { id: idMX } = await Currency.findOne({ name: 'mxn' });
+  await ExchangeRate.create({
+    buy: mexico[0].buy,
+    sell: mexico[0].sell,
+    country: mexico[0].country,
+    Currency: idMX,
   });
   currencies.push(mexico[0]);
 
@@ -66,6 +91,13 @@ const getCurrencies = async () => {
     buy: parseFloat(colombiaValues),
     sell: parseFloat(colombiaValues),
   });
+  const { id: idCOL } = await Currency.findOne({ name: 'col' });
+  await ExchangeRate.create({
+    buy: colombia[0].buy,
+    sell: colombia[0].sell,
+    country: colombia[0].country,
+    Currency: idCOL,
+  });
   currencies.push(colombia[0]);
 
   // CANADA
@@ -76,6 +108,13 @@ const getCurrencies = async () => {
   const xmlDoc = parser.parseFromString(responseCanada, 'text/xml');
   const dataCanada = xmlDoc.getElementsByTagName('v')[0].childNodes[0]
     .nodeValue;
+  const { id: idCANADA } = await Currency.findOne({ name: 'canada' });
+  await ExchangeRate.create({
+    buy: parseFloat(dataCanada),
+    sell: parseFloat(dataCanada),
+    country: 'canada',
+    Currency: idCANADA,
+  });
   currencies.push({
     country: 'canada',
     buy: parseFloat(dataCanada),
@@ -115,6 +154,13 @@ const getCurrencies = async () => {
       });
     }
   });
+  const { id: idEURO } = await Currency.findOne({ name: 'euro' });
+  await ExchangeRate.create({
+    buy: euro[0].buy,
+    sell: euro[0].sell,
+    country: euro[0].country,
+    Currency: idEURO,
+  });
   currencies.push(euro[0]);
 
   // REPUBLICA DOMINICANA
@@ -147,6 +193,13 @@ const getCurrencies = async () => {
         ),
       });
     }
+  });
+  const { id: idRD } = await Currency.findOne({ name: 'rd' });
+  await ExchangeRate.create({
+    buy: dominicRepublic[0].buy,
+    sell: dominicRepublic[0].sell,
+    country: dominicRepublic[0].country,
+    Currency: idRD,
   });
   currencies.push(dominicRepublic[0]);
 
@@ -185,10 +238,18 @@ const getCurrencies = async () => {
       ),
     });
   });
+  const { id: idREAL } = await Currency.findOne({ name: 'real' });
+  await ExchangeRate.create({
+    buy: brazil[0].buy,
+    sell: brazil[0].sell,
+    country: brazil[0].country,
+    Currency: idREAL,
+  });
   currencies.push(brazil[0]);
   return currencies;
 };
 
 module.exports = {
   getCurrencies,
+  generateCurrencies,
 };

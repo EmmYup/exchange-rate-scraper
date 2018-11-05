@@ -27,16 +27,16 @@ module.exports.connections = {
    * Installed by default.                                                    *
    *                                                                          *
    ***************************************************************************/
-  // sqlserver: {
-  //   adapter: 'sails-sqlserver',
-  //   user: 'sandbox_user',
-  //   password: 'XXcjJCDz_Piji',
-  //   host: 'ez9Uph.database.windows.net', // azure database
-  //   database: 'mydb',
-  //   options: {
-  //     encrypt: true   // use this for Azure databases
-  //   }
-  // }
+  sqlserver: {
+    adapter: 'sails-sqlserver',
+    user: 'sandbox_user',
+    password: 'XXcjJCDz_Piji',
+    host: 'ez9Uph.database.windows.net', // azure database
+    database: 'mydb',
+    options: {
+      encrypt: true, // use this for Azure databases
+    },
+  },
   // memory: {
   //   adapter: 'sails-memory',
   // },
