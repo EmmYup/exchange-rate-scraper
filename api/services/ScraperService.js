@@ -388,12 +388,15 @@ const getSingle = async name => {
     const xmlDoc = parser.parseFromString(responseCanada, 'text/xml');
     const dataCanada = xmlDoc.getElementsByTagName('v')[0].childNodes[0]
       .nodeValue;
-    currencies.push({
-      country: 'canada',
+    const { CurrencyID: idCA } = await Currency.findOne({ name: 'canada' });
+    const exchangeRate = await ExchangeRate.create({
       buy: parseFloat(dataCanada),
       sell: parseFloat(dataCanada),
+      country: 'canada',
+      date: new Date(),
+      CurrencyID: idCA,
     });
-    return currencies;
+    return exchangeRate;
   } else if (name === 'euro') {
     const urlEuro =
       'https://www.bbva.es/sistema/meta/tarifas/cambiosdivisasbilletes.jsp?mb=si';
