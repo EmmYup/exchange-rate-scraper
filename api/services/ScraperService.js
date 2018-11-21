@@ -14,7 +14,8 @@ const generateCurrencies = async () => {
 };
 
 const getCurrencies = async () => {
-  // const currency = await Currency.destroy();
+  await Currency.destroy();
+  await ExchangeRate.destroy();
   // const currency = await Currency.create({
   //   name: 'mxn',
   //   date: new Date(),
@@ -27,7 +28,7 @@ const getCurrencies = async () => {
   // const urlArgentina = `http://www.bna.com.ar/Personas#divisas`;
   // let { data: html } = await axios(urlArgentina);
   // let $ = cheerio.load(html);
-  let currencies = [];
+  // let currencies = [];
   // let argentina = [];
   // $('tr', '#divisas').each((i, elm) => {
   //   argentina.push({
@@ -68,26 +69,25 @@ const getCurrencies = async () => {
   // currencies.push(argentina);
 
   // // MEXICO
-  const date = moment(new Date()).format('DD/MM/YYYY');
-  const urlMexico = `http://www.banxico.org.mx/tipcamb/datosieajax?accion=dato&idSeries=SF43718&decimales=4&fecha=${date}`;
-  const mexico = [];
-  const { data: responsemx } = await axios(urlMexico);
-  mexico.push({
-    country: 'mexico',
-    buy: parseFloat(responsemx.body[0].mensaje),
-    sell: parseFloat(responsemx.body[0].mensaje),
-  });
-  const { CurrencyID: idMX } = await Currency.findOne({ name: 'mxn' });
+  // const date = moment(new Date()).format('DD/MM/YYYY');
+  // const urlMexico = `http://www.banxico.org.mx/tipcamb/datosieajax?accion=dato&idSeries=SF43718&decimales=4&fecha=${date}`;
+  // const mexico = [];
+  // const { data: responsemx } = await axios(urlMexico);
+  // mexico.push({
+  //   country: 'mexico',
+  //   buy: parseFloat(responsemx.body[0].mensaje),
+  //   sell: parseFloat(responsemx.body[0].mensaje),
+  // });
+  // const { CurrencyID: idMX } = await Currency.findOne({ name: 'mxn' });
 
-  console.log('idMX: ', idMX);
-  const exchangeRate = await ExchangeRate.create({
-    buy: mexico[0].buy,
-    sell: mexico[0].sell,
-    country: mexico[0].country,
-    date: new Date(),
-    CurrencyID: idMX,
-  });
-  return exchangeRate;
+  // const exchangeRate = await ExchangeRate.create({
+  //   buy: mexico[0].buy,
+  //   sell: mexico[0].sell,
+  //   country: mexico[0].country,
+  //   date: new Date(),
+  //   CurrencyID: idMX,
+  // });
+
   // currencies.push(mexico[0]);
 
   // // COLOMBIA
