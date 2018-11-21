@@ -14,4 +14,14 @@ module.exports = {
       res.negotiate(error);
     }
   },
+
+  async show(req, res) {
+    try {
+      const name = req.param('name');
+      const exchanceRate = await ScraperService.getSingle(name);
+      res.ok(exchanceRate);
+    } catch (error) {
+      res.negotiate(error);
+    }
+  },
 };
