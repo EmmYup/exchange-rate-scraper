@@ -430,8 +430,15 @@ const getSingle = async name => {
         });
       }
     });
-    currencies.push(euro[0]);
-    return currencies;
+    const { CurrencyID: idEURO } = await Currency.findOne({ name: 'euro' });
+    const exchangeRate = await ExchangeRate.create({
+      buy: euro[0].buy,
+      sell: euro[0].sell,
+      country: euro[0].country,
+      date: new Date(),
+      CurrencyID: idEURO,
+    });
+    return exchangeRate;
   } else if (name === 'brazil') {
     const urlBrazil =
       'https://ptax.bcb.gov.br/ptax_internet/consultarUltimaCotacaoDolar.do';
@@ -467,8 +474,15 @@ const getSingle = async name => {
         ),
       });
     });
-    currencies.push(brazil[0]);
-    return currencies;
+    const { CurrencyID: idBRA } = await Currency.findOne({ name: 'real' });
+    const exchangeRate = await ExchangeRate.create({
+      buy: brazil[0].buy,
+      sell: brazil[0].sell,
+      country: brazil[0].country,
+      date: new Date(),
+      CurrencyID: idBRA,
+    });
+    return exchangeRate;
   }
 };
 
