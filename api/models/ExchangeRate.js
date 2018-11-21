@@ -6,9 +6,11 @@
  */
 
 module.exports = {
-  tableName: 'ExchangeRate',
+  tableName: 'Exchange_Rate',
+  autoCreatedAt: false,
+  autoUpdatedAt: false,
   attributes: {
-    id: {
+    ExchangeRateID: {
       type: 'integer',
       primaryKey: true,
       unique: true,
@@ -32,18 +34,13 @@ module.exports = {
         'argentina',
       ],
     },
-    // createdAt: {
-    //   type: 'datetime',
-    //   columnName: 'created_at',
-    // },
-    // updatedAt: {
-    //   type: 'datetime',
-    //   columnName: 'updated_at',
-    // },
+    date: {
+      type: 'datetime',
+    },
+
     // Relations
-    currency: {
+    CurrencyID: {
       model: 'Currency',
-      columnName: 'id_currency',
     },
   },
 };

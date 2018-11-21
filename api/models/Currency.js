@@ -7,8 +7,10 @@
 
 module.exports = {
   tableName: 'Currency',
+  autoCreatedAt: false,
+  autoUpdatedAt: false,
   attributes: {
-    id: {
+    CurenncyID: {
       type: 'integer',
       primaryKey: true,
       unique: true,
@@ -18,18 +20,12 @@ module.exports = {
       type: 'string',
       enum: ['mxn', 'col', 'real', 'rd', 'canada', 'euro', 'arp'],
     },
-    // createdAt: {
-    //   type: 'datetime',
-    //   columnName: 'created_at',
-    // },
-    // updatedAt: {
-    //   type: 'datetime',
-    //   columnName: 'updated_at',
-    // },
-    // Relations
-    excangeRate: {
+    date: {
+      type: 'datetime',
+    },
+    ExcangeRate: {
       collection: 'ExchangeRate',
-      via: 'currency',
+      via: 'CurrencyID',
     },
   },
 };
