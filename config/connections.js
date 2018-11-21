@@ -28,13 +28,14 @@ module.exports.connections = {
    *                                                                          *
    ***************************************************************************/
   sqlserver: {
-    adapter: 'sails-sqlserver',
-    user: 'sandbox_user',
-    password: 'XXcjJCDz_Piji',
-    host: 'ez9Uph.database.windows.net', // azure database
+    adapter: 'sails-mssqlserver',
+    user: 'U2u8vSz8FyITWJz',
+    password: 'HfAsZjgYY#f66BPZ',
+    host: 'mydb.ctjmbkohiu7d.us-east-1.rds.amazonaws.com',
+    port: 1433, // azure database
     database: 'mydb',
     options: {
-      encrypt: true, // use this for Azure databases
+      encrypt: false, // use this for Azure databases
     },
   },
   // memory: {

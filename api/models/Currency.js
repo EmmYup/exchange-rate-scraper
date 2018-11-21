@@ -6,10 +6,10 @@
  */
 
 module.exports = {
+  tableName: 'Currency',
   attributes: {
-    tableName: 'currency',
     id: {
-      type: 'number',
+      type: 'integer',
       primaryKey: true,
       unique: true,
       autoIncrement: true,

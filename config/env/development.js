@@ -17,11 +17,11 @@ module.exports = {
    ***************************************************************************/
 
   secret: 'supersecret_development',
-  // models: {
-  //   connection: 'mongo',
-  //   migrate: 'safe',
-  //   schema: true,
-  // },
+  models: {
+    connection: 'sqlserver',
+    migrate: 'safe',
+    schema: true,
+  },
   log: {
     level: 'silly',
   },

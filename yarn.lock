@@ -2781,6 +2781,14 @@ ms@^2.1.1:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/ms/-/ms-2.1.1.tgz#30a5864eb3ebb0a66f2ebe6d727af06a09d86e0a"
 
+mssql@^2.1.3:
+  version "2.5.0"
+  resolved "http://registry.npmjs.org/mssql/-/mssql-2.5.0.tgz#380fe178d54211aacd3af323ac19f9a7845590ef"
+  dependencies:
+    generic-pool "^2.2.0"
+    promise "^7.0.1"
+    tedious "~1.13.1"
+
 mssql@^3.3.0:
   version "3.3.0"
   resolved "http://registry.npmjs.org/mssql/-/mssql-3.3.0.tgz#b6e6337ff123e87bf8aee1e6c8344b53ca5da856"
@@ -3651,6 +3659,16 @@ sails-mssqlserver@^0.14.3:
     underscore.string "^3.0.0"
     waterline-cursor "0.0.5"
 
+sails-sqlserver@^0.10.8:
+  version "0.10.8"
+  resolved "https://registry.yarnpkg.com/sails-sqlserver/-/sails-sqlserver-0.10.8.tgz#8e2af717b50bd18a99e6b7645ca37f8e60e5f6fd"
+  dependencies:
+    captains-log "^0.11.11"
+    lodash "^3.8.0"
+    mssql "^2.1.3"
+    underscore.string "^3.0.0"
+    waterline-cursor "0.0.5"
+
 sails-stringfile@~0.3.2:
   version "0.3.2"
   resolved "https://registry.yarnpkg.com/sails-stringfile/-/sails-stringfile-0.3.2.tgz#da4e3666a8f9cfd3e1f346bfb8116a303e1c30bd"
@@ -4137,6 +4155,17 @@ taskgroup@^4.0.5, taskgroup@^4.2.0:
   dependencies:
     ambi "^2.2.0"
     csextends "^1.0.3"
+
+tedious@~1.13.1:
+  version "1.13.2"
+  resolved "http://registry.npmjs.org/tedious/-/tedious-1.13.2.tgz#51d7724218772b7a59e31e148bdb4e7b53911058"
+  dependencies:
+    babel-runtime "^5.8.19"
+    big-number "0.3.1"
+    bl "^1.0.0"
+    iconv-lite "^0.4.11"
+    readable-stream "^2.0.2"
+    sprintf "0.1.5"
 
 tedious@~1.14.0:
   version "1.14.0"
