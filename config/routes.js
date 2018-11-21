@@ -1,4 +1,5 @@
 module.exports.routes = {
   'get /': 'AppController.index',
-  'get /scraper': 'ScraperController.index',
+  'get /exchangerate': 'ScraperController.index',
+  'get /exchangerate/:name': 'ScraperController.show',
 };
