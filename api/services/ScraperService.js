@@ -371,8 +371,15 @@ const getSingle = async name => {
         });
       }
     });
-    currencies.push(dominicRepublic[0]);
-    return currencies;
+    const { CurrencyID: idRD } = await Currency.findOne({ name: 'rd' });
+    const exchangeRate = await ExchangeRate.create({
+      buy: dominicRepublic[0].buy,
+      sell: dominicRepublic[0].sell,
+      country: dominicRepublic[0].country,
+      date: new Date(),
+      CurrencyID: idRD,
+    });
+    return exchangeRate;
   } else if (name === 'canada') {
     const urlCanada =
       'https://www.bankofcanada.ca/valet/observations/FXCADUSD/xml?recent=1';
