@@ -309,9 +309,15 @@ const getSingle = async name => {
         currency.currency.indexOf('Dolar U.S.A') ? coin : currency,
       argentina[0]
     );
-    delete argentina.currency;
-    currencies.push(argentina);
-    return currencies;
+    const { CurrencyID: idAR } = await Currency.findOne({ name: 'arp' });
+    const exchangeRate = await ExchangeRate.create({
+      buy: argentina.buy,
+      sell: argentina.sell,
+      country: argentina.country,
+      date: new Date(),
+      CurrencyID: idAR,
+    });
+    return exchangeRate;
   } else if (name === 'colombia') {
     const urlColombia =
       'https://www.indicadorescolombia.com/cambio-de-dolar-peso-colombiano-hoy.html';
