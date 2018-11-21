@@ -331,8 +331,15 @@ const getSingle = async name => {
       buy: parseFloat(colombiaValues),
       sell: parseFloat(colombiaValues),
     });
-    currencies.push(colombia[0]);
-    return currencies;
+    const { CurrencyID: idCO } = await Currency.findOne({ name: 'col' });
+    const exchangeRate = await ExchangeRate.create({
+      buy: colombia[0].buy,
+      sell: colombia[0].sell,
+      country: colombia[0].country,
+      date: new Date(),
+      CurrencyID: idCO,
+    });
+    return exchangeRate;
   } else if (name === 'dominica') {
     const urlRD =
       'https://www4.scotiabank.com/cgi-bin/ratesTool/depdisplay.cgi?pid=80';
